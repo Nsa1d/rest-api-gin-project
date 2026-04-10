@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"rest-api-gin-project/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,9 +9,12 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/test", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"тест": "все норм"})
-	})
+	r.GET("/books", service.GetBooks)
+	r.GET("/books/:id", service.GetBook)
+	r.GET("/reviews", service.GetReviews)
+	r.POST("/books", service.CreateBook)
+	r.PATCH("/books/:id", service.UpdateBook)
+	r.DELETE("/books/:id", service.DeleteBook)
 
 	r.Run(":8080")
 }
